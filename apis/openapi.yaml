@@ -1,0 +1,24 @@
+workflow:
+  - step: Fetch projects
+    method: "GET"
+    url: "https://api.openai.com/v1/organization/projects"
+    endpoint: GET /projects
+    requires:
+      - Authorization
+    prompt:
+      - message: Enter your admin API key
+        field: Authorization
+    response_action: Display list
+
+  # - step: Update project name
+  #   endpoint: PATCH /projects/{id}
+  #   requires:
+  #     - Authorization
+  #   prompt:
+  #     - message: Select a project to update
+  #       field: project_id
+  #       options: Use response from "Fetch projects"
+  #     - message: Enter the new project name
+  #       field: name
+  #   request_body:
+  #     name: "{name}"
