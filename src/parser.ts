@@ -37,12 +37,19 @@ function buildCurlCommand(workflowStep: any, userInput: Record<string, string>):
   
   // Construct headers based on required fields
   let headers = '';
+
   requires.forEach((field: string) => {
     if (userInput[field]) {
-      headers += `-H "${field}: ${userInput[field]}" `;
+      const value = field === 'Authorization' ? `Bearer ${userInput[field]}` : userInput[field];
+      headers += `-H "${field}: ${value}" `;
     }
   });
 
   // Build the full cURL command
-  return `${method} ${url} ${headers}`;
+  if (method === 'GET') {
+    return `curl ${url} ${headers}`;
+  }
+
+  return `curl -X ${method} ${url} ${headers}`;
+
 }
