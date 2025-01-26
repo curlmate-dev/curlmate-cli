@@ -8,6 +8,7 @@
   },
   "scripts": {
     "build": "tsc",
+    "postbuild": "./setup.sh",
     "start": "node dist/curlgen.js",
     "test": "echo 'No tests yet!'"
   },
